@@ -1,18 +1,24 @@
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "127.0.0.1",   
-  user: "root",
-  password: "",        
-  database: "online_medicine_store",
-  port: 3307           
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+
+  // 🔴 AIVEN + RENDER KE LIYE YE MOST IMPORTANT HAI
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 db.connect((err) => {
   if (err) {
-    console.log("MySQL Connection Failed:", err.message);
+    console.error("❌ Aiven MySQL connection failed:");
+    console.error(err.message);
   } else {
-    console.log("MySQL Connected Successfully");
+    console.log("✅ Aiven MySQL Connected Successfully");
   }
 });
 
