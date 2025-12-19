@@ -1,0 +1,24 @@
+# Node packages
+node_modules/
+
+# Environment variables (never push to GitHub)
+.env
+frontend/.env
+backend-node/.env
+
+# Build folders
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
