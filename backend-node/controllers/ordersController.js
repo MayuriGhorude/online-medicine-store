@@ -5,7 +5,7 @@ exports.placeOrder = (req, res) => {
   const userId = req.user.id;
   const { items, total } = req.body;
 
-  db.query(
+  await db.query(
     "INSERT INTO orders (user_id, total_amount) VALUES (?, ?)",
     [userId, total],
     (err, result) => {
@@ -20,7 +20,7 @@ exports.placeOrder = (req, res) => {
         item.price
       ]);
 
-      db.query(
+      await db.query(
         "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ?",
         [values],
         () => {
@@ -50,7 +50,7 @@ exports.getOrders = (req, res) => {
     ORDER BY o.created_at DESC
   `;
 
-  db.query(sql, [userId], (err, rows) => {
+  await db.query(sql, [userId], (err, rows) => {
     if (err) return res.status(500).json(err);
 
     

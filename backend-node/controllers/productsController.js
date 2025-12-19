@@ -4,7 +4,7 @@ const db = require("../config/db");
 exports.getAllProducts = (req, res) => {
   const sql = "SELECT * FROM products";
 
-  db.query(sql, (err, results) => {
+  await db.query(sql, (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: "Database error" });
@@ -19,7 +19,7 @@ exports.getProductById = (req, res) => {
 
   const sql = "SELECT * FROM products WHERE id = ?";
 
-  db.query(sql, [productId], (err, results) => {
+  await db.query(sql, [productId], (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: "Database error" });

@@ -15,7 +15,7 @@ exports.register = (req, res) => {
   const sql =
     "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
-  db.query(sql, [name, email, hashedPassword], (err) => {
+  await db.query(sql, [name, email, hashedPassword], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: "User already exists" });
@@ -31,7 +31,7 @@ exports.login = (req, res) => {
 
   const sql = "SELECT * FROM users WHERE email = ?";
 
-  db.query(sql, [email], (err, result) => {
+  await db.query(sql, [email], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: "DB error" });
